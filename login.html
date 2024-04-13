@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Log in Form</title>
+  <style>
+    body{
+      background-color: #BED7DC;
+    }
+    .container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 50px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+    input[type=text], input[type=password] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100px;
+    }
+    .back-btn{
+      background-color: red;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100px;
+      text-decoration: none;
+    }
+    button:hover {
+      opacity: 0.8;
+    }
+    .error-message {
+      background-color: red;
+      color: whitesmoke;
+      margin-top: 10px;
+    }
+    img{
+      height: 100px;
+      margin-bottom: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="https://www.shareicon.net/data/512x512/2015/09/18/103160_man_512x512.png">
+    <div id="errorMessage" class="error-message"></div>
+    <form id="loginForm">
+      <label for="uname"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="uname" id="uname" required>
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+      <button type="submit">Login</button>
+      <a href="index.html" class="back-btn">Back</a>
+    </form>
+  </div>
+   <script>
+    // Function to handle form submission
+    function handleLogin() {
+      // Get form input values
+      var username = document.getElementById("uname").value;
+      var password = document.getElementById("psw").value;
+
+      // Check if username and password match expected values
+      if (username === "example" && password === "password") {
+        // Download the file
+        downloadFile();
+        // Redirect user to a success page or perform other actions
+        window.location.href = "login.html";
+      } else {
+        // Display error message
+        document.getElementById("errorMessage").textContent = "Invalid username or password";
+      }
+
+      // Prevent form submission
+      return false;
+    }
+
+    // Attach form submission handler
+    document.getElementById("loginForm").onsubmit = handleLogin;
+
+    // Function to download the file after successful login
+    function downloadFile() {
+      // Create a sample file data
+      const fileData = 'Sample file content';
+
+      // Create a Blob object with the file data
+      const blob = new Blob([fileData], { type: 'text/plain' });
+
+      // Create a URL for the Blob object
+      const url = URL.createObjectURL(blob);
+
+      // Create an anchor element
+      const a = document.createElement('a');
+
+      // Set the href attribute to the URL
+      a.href = url;
+
+      // Set the download attribute to the desired filename
+      a.download = 'sample.txt'; // Replace 'sample.txt' with your desired filename
+
+      // Programmatically trigger a click event on the anchor element
+      a.click();
+
+      // Clean up by revoking the URL
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>
